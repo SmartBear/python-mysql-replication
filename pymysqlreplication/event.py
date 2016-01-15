@@ -5,6 +5,8 @@ import datetime
 
 from pymysql.util import byte2int, int2byte
 
+from pymysqlreplication import constants
+
 
 class BinLogEvent(object):
     def __init__(self, from_packet, event_size, table_map, ctl_connection,
