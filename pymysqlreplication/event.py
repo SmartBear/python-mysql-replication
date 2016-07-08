@@ -146,6 +146,7 @@ class QueryEvent(BinLogEvent):
             self.query = self.query.decode("utf-8")
         except UnicodeDecodeError as error:
             logger.warning(error, exc_info=True)
+            logger.info("QUERY: {}".format(self.query))
             self.query = self.query.decode("latin-1")
         #string[EOF]    query
 
