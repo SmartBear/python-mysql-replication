@@ -2,10 +2,11 @@
 
 import struct
 import datetime
+import logging
 
 from pymysql.util import byte2int, int2byte
 
-from pymysqlreplication import constants
+logger = logging.getLogger(__file__)
 
 
 class BinLogEvent(object):
@@ -143,7 +144,8 @@ class QueryEvent(BinLogEvent):
 
         try:
             self.query = self.query.decode("utf-8")
-        except UnicodeDecodeError:
+        except UnicodeDecodeError as error:
+            logger.warning(error, exc_info=True)
             self.query = self.query.decode("latin-1")
         #string[EOF]    query
 
